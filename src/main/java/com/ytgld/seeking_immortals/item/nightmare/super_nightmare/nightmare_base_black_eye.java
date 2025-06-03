@@ -37,10 +37,10 @@ public class nightmare_base_black_eye extends nightmare implements SuperNightmar
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> linkedHashMultimap = com.google.common.collect.LinkedHashMultimap.create();
         CuriosApi
-                .addSlotModifier(linkedHashMultimap, "nightmare",uuid, 3, AttributeModifier.Operation.ADDITION);
+                .addSlotModifier(linkedHashMultimap, "nightmare",
+                        uuid, 3, AttributeModifier.Operation.ADDITION);
 
-        return super.getAttributeModifiers(slotContext, uuid, stack);
-
+        return linkedHashMultimap;
     }
 
     //白天会视力模糊

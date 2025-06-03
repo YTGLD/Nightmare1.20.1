@@ -123,14 +123,67 @@ public abstract class GuiGraphicsMixin {
             int i1 = vector2ic.y();
             if (tooltipStack.getItem()instanceof INightmare){
                 this.pose.pushPose();
+                si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
                 moonstone$renderTooltipBackground_nig((GuiGraphics)(Object)this, l, i1, i2, j2, 400, 0xff000000,0xff000000,0xff000000,0xff000000);
+
                 this.pose.popPose();
             }
         });
 
     }
+    @Unique
+    public void si1_21_4$renderTooltipBackground(GuiGraphics guiGraphics, int x, int y, int width, int height, int z) {
+        // 左上角
+        int topLeftX = x - 3 - 9+2;
+        int topLeftY = y - 3 - 9;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, -2, (float)z);
+        guiGraphics.blit(
+                new ResourceLocation(SeekingImmortalsMod.MODID,
+                        "textures/gui/tooltip/tool_0_0.png"), topLeftX, topLeftY,  0, 0, 48, 48, 48, 48);
+        guiGraphics.pose().popPose();
+
+        // 中间位置
+        int middleX = x + (width - 48) / 2;
+        int middleY = y - 3 - 9;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, -7, (float)z);
+        guiGraphics.blit(
+                new ResourceLocation(SeekingImmortalsMod.MODID,
+                        "textures/gui/tooltip/tool_middle_0.png"), middleX, middleY, 0, 0, 48, 48, 48, 48);
+        guiGraphics.pose().popPose();
 
 
+        // 右上角
+        int topRightX = x + width + 3 - 48+6;
+        int topRightY = y - 3 - 9;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, -2, (float)z);
+        guiGraphics.blit(
+                new ResourceLocation(SeekingImmortalsMod.MODID,
+                        "textures/gui/tooltip/tool_0_1.png"), topRightX, topRightY, 0, 0, 48, 48, 48, 48);
+        guiGraphics.pose().popPose();
+
+        // 左下角
+        int bottomLeftX = x - 3 - 9 + 2;
+        int bottomLeftY = y + height + 3 - 48 + 4;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, 4, (float)z);
+        guiGraphics.blit(
+                new ResourceLocation(SeekingImmortalsMod.MODID,
+                        "textures/gui/tooltip/tool_1_0.png"),bottomLeftX, bottomLeftY,0, 0, 48, 48, 48, 48);
+        guiGraphics.pose().popPose();
+
+        // 右下角
+        int bottomRightX = x + width + 3 - 48 + 6;
+        int bottomRightY = y + height + 3 - 48 + 4;
+        guiGraphics.pose().pushPose();
+        guiGraphics.pose().translate(0.0F, 4, (float)z);
+        guiGraphics.blit(
+                new ResourceLocation(SeekingImmortalsMod.MODID,
+                        "textures/gui/tooltip/tool_1_1.png"),bottomRightX, bottomRightY, 0, 0, 48, 48, 48, 48);
+        guiGraphics.pose().popPose();
+    }
     @Unique
     private void moonstone$renderTooltipBackground_nig(GuiGraphics p_282666_, int p_281901_, int p_281846_, int p_281559_, int p_283336_, int p_283422_, int backgroundTop, int backgroundBottom, int borderTop, int borderBottom)
     {
@@ -138,24 +191,24 @@ public abstract class GuiGraphicsMixin {
         int j = p_281846_ - 3;
         int k = p_281559_ + 3 + 3;
         int l = p_283336_ + 3 + 3;
-        moonstone$renderHorizontalLine_nig(p_282666_, i, j - 1, k, p_283422_, backgroundTop);
-        moonstone$renderHorizontalLine_nig(p_282666_, i, j + l, k, p_283422_, backgroundBottom);
-        moonstone$renderRectangle_nig(p_282666_, i, j, k, l, p_283422_, backgroundTop, backgroundBottom);
-        moonstone$renderVerticalLineGradient_nig(p_282666_, i - 1, j, l, p_283422_, backgroundTop, backgroundBottom);
-        moonstone$renderVerticalLineGradient_nig(p_282666_, i + k, j, l, p_283422_, backgroundTop, backgroundBottom);
+        moonstone$renderHorizontalLine_nig(i, j - 1, k, p_283422_, backgroundTop);
+        moonstone$renderHorizontalLine_nig(i, j + l, k, p_283422_, backgroundBottom);
+        moonstone$renderRectangle_nig(i, j, k, l, p_283422_, backgroundTop, backgroundBottom);
+        moonstone$renderVerticalLineGradient_nig(i - 1, j, l, p_283422_, backgroundTop, backgroundBottom);
+        moonstone$renderVerticalLineGradient_nig(i + k, j, l, p_283422_, backgroundTop, backgroundBottom);
     }
 
     @Unique
-    private void moonstone$renderHorizontalLine_nig(GuiGraphics p_282981_, int p_282028_, int p_282141_, int p_281771_, int p_282734_, int p_281979_) {
+    private void moonstone$renderHorizontalLine_nig(int p_282028_, int p_282141_, int p_281771_, int p_282734_, int p_281979_) {
         moonstone$fill_nig(p_282028_, p_282141_, p_282028_ + p_281771_, p_282141_ + 1, p_282734_, p_281979_);
     }
 
 
     @Unique
-    private void moonstone$renderVerticalLineGradient_nig(GuiGraphics p_282478_, int p_282583_, int p_283262_, int p_283161_, int p_283322_, int p_282624_, int p_282756_) {
+    private void moonstone$renderVerticalLineGradient_nig(int p_282583_, int p_283262_, int p_283161_, int p_283322_, int p_282624_, int p_282756_) {
         moonstone$fillGradient_nig(p_282583_, p_283262_, p_282583_ + 1, p_283262_ + p_283161_, p_283322_, p_282624_, p_282756_);
     }@Unique
-    private void moonstone$renderRectangle_nig(GuiGraphics p_281392_, int p_282294_, int p_283353_, int p_282640_, int p_281964_, int p_283211_, int p_282349_, int colorTo) {
+    private void moonstone$renderRectangle_nig(int p_282294_, int p_283353_, int p_282640_, int p_281964_, int p_283211_, int p_282349_, int colorTo) {
         moonstone$fillGradient_nig(p_282294_, p_283353_, p_282294_ + p_282640_, p_283353_ + p_281964_, p_283211_, p_282349_, colorTo);
     }
 

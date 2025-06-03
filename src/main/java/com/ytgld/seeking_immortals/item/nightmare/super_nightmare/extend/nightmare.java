@@ -1,5 +1,6 @@
 package com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend;
 
+import com.ytgld.seeking_immortals.Handler;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +22,14 @@ public class nightmare extends Item implements ICurioItem, INightmare {
         if (stack.getTag() == null) {
             stack.getOrCreateTag();
         }
+    }
+
+    @Override
+    public boolean canEquip(SlotContext slotContext, ItemStack stack) {
+        if (Handler.hascurio(slotContext.entity(),this)){
+            return false;
+        }
+        return true;
     }
 
     @NotNull

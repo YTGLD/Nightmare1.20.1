@@ -63,10 +63,10 @@ public class nightmare_base_stone extends nightmare implements SuperNightmare {
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> linkedHashMultimap = com.google.common.collect.LinkedHashMultimap.create();
         CuriosApi
-                .addSlotModifier(linkedHashMultimap, "nightmare",uuid, 3, AttributeModifier.Operation.ADDITION);
+                .addSlotModifier(linkedHashMultimap, "nightmare",
+                        uuid, 3, AttributeModifier.Operation.ADDITION);
 
-        return super.getAttributeModifiers(slotContext, uuid, stack);
-
+        return linkedHashMultimap;
     }
     @Override
     public void appendHoverText(ItemStack stack, net.minecraft.world.level.Level context, List<Component> pTooltipComponents, TooltipFlag tooltipFlag) {

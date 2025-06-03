@@ -122,10 +122,10 @@ public class nightmare_base_reversal extends nightmare implements SuperNightmare
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid, ItemStack stack) {
         Multimap<Attribute, AttributeModifier> linkedHashMultimap = com.google.common.collect.LinkedHashMultimap.create();
         CuriosApi
-                .addSlotModifier(linkedHashMultimap, "nightmare",uuid, 3, AttributeModifier.Operation.ADDITION);
+                .addSlotModifier(linkedHashMultimap, "nightmare",
+                        uuid, 3, AttributeModifier.Operation.ADDITION);
 
-        return super.getAttributeModifiers(slotContext, uuid, stack);
-
+        return linkedHashMultimap;
     }
     public Multimap<Attribute, AttributeModifier> geta(ItemStack stack) {
         Multimap<Attribute, AttributeModifier> get = HashMultimap.create();
