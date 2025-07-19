@@ -34,9 +34,9 @@ public class nightmare_base_stone_virus extends nightmare implements SuperNightm
 
     public  Multimap<Attribute, AttributeModifier> getAttributeModifiers() {
          Multimap<Attribute, AttributeModifier> attributeModifiers = HashMultimap.create();
-        attributeModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("fbec47ce-171e-4eeb-afb0-8ed4a7387030"),"a", 1, AttributeModifier.Operation.MULTIPLY_BASE));
-        attributeModifiers.put(AttReg.heal.get(), new AttributeModifier(UUID.fromString("fbec47ce-171e-4eeb-afb0-8ed4a7387030"),"a", 1, AttributeModifier.Operation.MULTIPLY_BASE));
-        attributeModifiers.put(AttReg.cit.get(), new AttributeModifier(UUID.fromString("fbec47ce-171e-4eeb-afb0-8ed4a7387030"),"a", 1, AttributeModifier.Operation.MULTIPLY_BASE));
+        attributeModifiers.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(UUID.fromString("fbec47ce-171e-4eeb-afb0-8ed4a7387030"),"a", 0.33f, AttributeModifier.Operation.MULTIPLY_BASE));
+        attributeModifiers.put(AttReg.heal.get(), new AttributeModifier(UUID.fromString("fbec47ce-171e-4eeb-afb0-8ed4a7387030"),"a", 0.33f, AttributeModifier.Operation.MULTIPLY_BASE));
+        attributeModifiers.put(AttReg.cit.get(), new AttributeModifier(UUID.fromString("fbec47ce-171e-4eeb-afb0-8ed4a7387030"),"a", 0.33f, AttributeModifier.Operation.MULTIPLY_BASE));
 
         return attributeModifiers;
 

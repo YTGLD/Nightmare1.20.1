@@ -1,11 +1,15 @@
 package com.ytgld.seeking_immortals.item.nightmare.super_nightmare;
 
 import com.google.common.collect.Multimap;
+import com.ytgld.seeking_immortals.Config;
+import com.ytgld.seeking_immortals.init.DataReg;
 import com.ytgld.seeking_immortals.init.Items;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.SuperNightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.nightmare;
 import net.minecraft.ChatFormatting;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +18,8 @@ import net.minecraft.world.item.TooltipFlag;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +38,37 @@ public class nightmare_base_insight extends nightmare implements SuperNightmare 
         return false;
     }
 
-
+    @Override
+    public void curioTick(SlotContext slotContext, ItemStack stack) {
+        if (stack.getTag()!=null) {
+            if (stack.getTag().getBoolean("give_nightmare_base_insight_drug")){
+                return;
+            }
+            if (!stack.getTag().getBoolean("give_nightmare_base_insight_drug")) {
+                if (slotContext.entity() instanceof Player player) {
+                    List<Integer> integers = new ArrayList<>();
+                    int a = 0;
+                    Collection<MobEffectInstance> collection = player.getActiveEffects();
+                    if (!collection.isEmpty()) {
+                        for (MobEffectInstance effectInstance : collection) {
+                            if (effectInstance.getEffect().isBeneficial()) {
+                                integers.add(1);
+                            }
+                        }
+                    }
+                    for (int ignored : integers) {
+                        a++;
+                    }
+                    if (a >= Config.SERVER.give_nightmare_base_insight_drug.get()) {
+                        player.addItem(new ItemStack(Items.nightmare_base_insight_drug.get()));
+                        stack.getTag().putBoolean("give_nightmare_base_insight_drug",true);
+                    }
+                }
+            }
+        }else {
+            stack.getOrCreateTag();
+        }
+    }
     @Override
     public void appendHoverText(ItemStack stack, net.minecraft.world.level.Level context, List<Component> pTooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, pTooltipComponents, tooltipFlag);

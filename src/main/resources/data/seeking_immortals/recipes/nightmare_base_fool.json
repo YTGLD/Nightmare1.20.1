@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "seeking_immortals:nightmare_base_redemption_deception"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_redemption_degenerate"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_redemption_down_and_out"
+    }
+  ],
+  "result": {
+    "item": "seeking_immortals:nightmare_base_fool"
+  }
+}

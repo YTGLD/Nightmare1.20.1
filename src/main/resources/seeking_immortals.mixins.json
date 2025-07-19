@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "seeking_immortals.refmap.json",
   "mixins": [
+    "EnchantmentMenuMixin",
     "EntityMixin",
     "LivingEntityMixin",
     "MobEffectInstanceMixin",

@@ -2,6 +2,7 @@ package com.ytgld.seeking_immortals.item.nightmare.super_nightmare;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.ytgld.seeking_immortals.Config;
 import com.ytgld.seeking_immortals.Handler;
 import com.ytgld.seeking_immortals.event.old.AdvancementEvt;
 import com.ytgld.seeking_immortals.init.Items;
@@ -61,7 +62,8 @@ public class nightmare_base_reversal extends nightmare implements SuperNightmare
                             ItemStack stack = stackHandler.getStackInSlot(i);
                             if (stack.is(Items.nightmare_base_reversal.get())) {
                                 if (stack.getTag() != null) {
-                                    stack.getTag().putInt(att, 96);
+                                    float s = 100 - Config.SERVER.nightmare_base_reversal.get();
+                                    stack.getTag().putInt(att, (int) s);
                                 }
                             }
                         }

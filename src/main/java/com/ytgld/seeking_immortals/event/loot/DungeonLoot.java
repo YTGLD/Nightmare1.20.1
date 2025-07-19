@@ -2,10 +2,17 @@ package com.ytgld.seeking_immortals.event.loot;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.ytgld.seeking_immortals.Handler;
 import com.ytgld.seeking_immortals.event.old.AdvancementEvt;
+import com.ytgld.seeking_immortals.init.DataReg;
+import com.ytgld.seeking_immortals.init.Items;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
@@ -13,6 +20,11 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 import org.jetbrains.annotations.NotNull;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
+
+import java.util.Map;
 
 public class DungeonLoot extends LootModifier {
     public static final Codec<DungeonLoot> CODEC= RecordCodecBuilder.create((inst) -> codecStart(inst)
@@ -41,7 +53,13 @@ public class DungeonLoot extends LootModifier {
 
             }
         }
-
+        if (idSting.contains("chests/")){
+            if (idSting.contains("dungeon")||idSting.contains("mansion")){
+                this.give(generatedLoot,entity,10,"defend_against_runestone", Items.nightmare_base.get(),Items.defend_against_runestone.get());
+                this.give(generatedLoot,entity,10,"revive_runestone",Items.nightmare_base.get(),Items.revive_runestone.get());
+                this.give(generatedLoot,entity,10,"strengthen_runestone",Items.nightmare_base.get(),Items.strengthen_runestone.get());
+            }
+        }
 
         if (idSting.contains("chests/")) {
             if (idSting.contains("dungeon")) {
@@ -52,6 +70,36 @@ public class DungeonLoot extends LootModifier {
             }
         }
         return generatedLoot;
+    }
+    public void give(ObjectArrayList<ItemStack> generatedLoot,
+                     Entity entity,
+                     int lv,String name,
+                     Item must,
+                     Item give){
+        if (entity instanceof Player player ){
+            if (Handler.hascurio(player, must)) {
+                CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
+                    Map<String, ICurioStacksHandler> curios = handler.getCurios();
+                    for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
+                        ICurioStacksHandler stacksHandler = entry.getValue();
+                        IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                        for (int i = 0; i < stacksHandler.getSlots(); i++) {
+                            ItemStack stack = stackHandler.getStackInSlot(i);
+                            if (stack.is(must)) {
+                                if (Mth.nextInt(RandomSource.create(), 1, 100) <= lv) {
+                                    if (stack.getTag() != null) {
+                                        if (!stack.getTag().getBoolean(name)) {
+                                            generatedLoot.add(new ItemStack(give));
+                                            stack.getTag().putBoolean(name, true);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
     }
 }
 

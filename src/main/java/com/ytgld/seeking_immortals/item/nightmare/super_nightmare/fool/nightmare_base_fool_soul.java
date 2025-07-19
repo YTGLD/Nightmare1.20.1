@@ -58,7 +58,7 @@ public class nightmare_base_fool_soul extends nightmare implements SuperNightmar
         });
         float health = 0;
         for (int ignored : integersHealth) {
-            health += 6;
+            health += 1;
         }
         linkedHashMultimap.put(Attributes.MAX_HEALTH, new AttributeModifier(UUID.fromString("d536cf86-388b-46fc-bfee-669277a0ebcf"),"s", health, AttributeModifier.Operation.ADDITION));
         return linkedHashMultimap;
@@ -86,7 +86,7 @@ public class nightmare_base_fool_soul extends nightmare implements SuperNightmar
             health++;
         }
         health /= 100;
-        health *= 3f;
+        health *= 1;
         linkedHashMultimap.put(AttReg.heal.get(), new AttributeModifier(UUID.fromString("d536cf86-388b-46fc-bfee-669277a0ebcf"),"s", health, AttributeModifier.Operation.ADDITION));
         return linkedHashMultimap;
     }

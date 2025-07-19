@@ -2,6 +2,7 @@ package com.ytgld.seeking_immortals.init;
 
 import com.ytgld.seeking_immortals.SeekingImmortalsMod;
 import com.ytgld.seeking_immortals.item.nightmare.immortal;
+import com.ytgld.seeking_immortals.item.nightmare.base.*;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.eye.nightmare_base_black_eye_eye;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.eye.nightmare_base_black_eye_heart;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.eye.nightmare_base_black_eye_red;
@@ -15,6 +16,7 @@ import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.insight.nightm
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.insight.nightmare_base_insight_insane;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.insight.ring;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.*;
+import com.ytgld.seeking_immortals.item.nightmare.*;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.redemption.hypocritical_self_esteem;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.redemption.nightmare_base_redemption_deception;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.redemption.nightmare_base_redemption_degenerate;
@@ -26,6 +28,7 @@ import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.reversal.night
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.start.nightmare_base_start_egg;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.start.nightmare_base_start_pod;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.start.nightmare_base_start_power;
+import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.start.wolf;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.stone.*;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
@@ -74,7 +77,14 @@ public class Items {
     public static final RegistryObject<Item> apple =REGISTRY.register("apple", apple::new);
     public static final RegistryObject<Item> ring =REGISTRY.register("ring", ring::new);
     public static final RegistryObject<Item> immortal =REGISTRY.register("immortal", immortal::new);
+    public static final RegistryObject<Item> wolf =REGISTRY.register("wolf", wolf::new);
     public static final RegistryObject<Item> hypocritical_self_esteem =REGISTRY.register("hypocritical_self_esteem", hypocritical_self_esteem::new);
+    public static final RegistryObject<Item> falling_immortals =REGISTRY.register("falling_immortals", falling_immortals::new);
+
+    public static final RegistryObject<Item> revive_runestone =REGISTRY.register("revive_runestone", revive_runestone::new);
+    public static final RegistryObject<Item> disintegrating_stone =REGISTRY.register("disintegrating_stone", disintegrating_stone::new);
+    public static final RegistryObject<Item> strengthen_runestone =REGISTRY.register("strengthen_runestone", strengthen_runestone::new);
+    public static final RegistryObject<Item> defend_against_runestone =REGISTRY.register("defend_against_runestone", defend_against_runestone::new);
 
     public static final RegistryObject<Item> nightmare_base_start_power =REGISTRY.register("nightmare_base_start_power", nightmare_base_start_power::new);
     public static final RegistryObject<Item> tricky_puppets =REGISTRY.register("tricky_puppets", tricky_puppets::new);

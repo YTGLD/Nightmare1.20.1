@@ -38,7 +38,7 @@ public class nightmare_base_black_eye_eye extends nightmare implements SuperNigh
                 Entity entity = getPlayerLookTarget(player.level(), player);
                 if (entity instanceof LivingEntity living0) {
                     if (living0.is(event.getEntity())) {
-                        event.setAmount(event.getAmount() * 2);
+                        event.setAmount(event.getAmount() * 1.2f);
                     }
                 }
             }

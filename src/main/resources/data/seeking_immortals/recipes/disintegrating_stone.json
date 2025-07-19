@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    },
+    {
+      "tag": "curios:nightmare"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_insight_collapse"
+    },
+    {
+      "item": "seeking_immortals:immortal"
+    }
+  ],
+  "result": {
+    "item": "seeking_immortals:disintegrating_stone",
+    "count": 1
+  }
+}

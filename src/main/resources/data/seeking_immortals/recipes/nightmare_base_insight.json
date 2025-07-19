@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "seeking_immortals:nightmare_base_fool_soul"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_fool_betray"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_fool_bone"
+    }
+  ],
+  "result": {
+    "item": "seeking_immortals:nightmare_base_insight"
+  }
+}

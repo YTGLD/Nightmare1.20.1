@@ -1,6 +1,7 @@
 package com.ytgld.seeking_immortals.event.old;
 
 import com.ytgld.seeking_immortals.Handler;
+import com.ytgld.seeking_immortals.init.DataReg;
 import com.ytgld.seeking_immortals.init.Items;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.Mth;
@@ -9,6 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.sniffer.Sniffer;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
@@ -88,8 +90,38 @@ public class AdvancementEvt {
     public static final String nightmare_base_start_power = "nightmare_base_start_power";
     public static final String nightmare_base_start_egg = "nightmare_base_start_egg";
     public static final String nightmare_base_start_pod = "nightmare_base_start_pod";
+    public static final String wolf = "wolf";
 
-
+    @SubscribeEvent
+    public void wolf(LivingDropsEvent event){
+        if (event.getSource().getEntity() instanceof Wolf wolf_entity){
+            if (wolf_entity.getOwner() instanceof Player player) {
+                if (Handler.hascurio(player, Items.nightmare_base_start.get())) {
+                    CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
+                        Map<String, ICurioStacksHandler> curios = handler.getCurios();
+                        for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
+                            ICurioStacksHandler stacksHandler = entry.getValue();
+                            IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                            for (int i = 0; i < stacksHandler.getSlots(); i++) {
+                                ItemStack stack = stackHandler.getStackInSlot(i);
+                                if (stack.is(Items.nightmare_base_start.get())) {
+                                    if (stack.getTag() != null) {
+                                        if (event.getEntity() instanceof Warden warden) {
+                                            if (!stack.getTag().getBoolean(wolf)) {
+                                                event.getDrops().add(new ItemEntity(warden.level(), warden.getX(), warden.getY(), warden.getZ(),
+                                                        new ItemStack(Items.wolf.get())));
+                                                stack.getTag().putBoolean(wolf, true);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    }
 
     @SubscribeEvent
     public void hypocritical_self_esteem(LivingDropsEvent event){

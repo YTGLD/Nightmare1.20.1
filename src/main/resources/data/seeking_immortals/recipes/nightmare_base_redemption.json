@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "seeking_immortals:nightmare_base_reversal_orb"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_reversal_card"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_reversal_mysterious"
+    }
+  ],
+  "result": {
+    "item": "seeking_immortals:nightmare_base_redemption"
+  }
+}

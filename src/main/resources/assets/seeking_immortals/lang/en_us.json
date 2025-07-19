@@ -21,6 +21,17 @@
 
 
 
+  "item.seeking_immortals.wolf":"§4Lonely Wolf",
+  "item.wolf.tool.string": "Killing each type of creature will increase your life and armor by 1 point",
+  "item.wolf.tool.string.1": "You deal an additional 25% damage to creatures you have previously killed",
+  "item.wolf.tool.string.2": "Mark nearby units that you have patrolled",
+  "item.wolf.tool.string.3": "Each time you are injured, the damage is transferred to them; if a unit dies, the item enters a 5-second cooldown",
+  "seeking_immortals.item.kill": "You haven't worn it yet, you haven't killed a creature",
+  "advancements.tooltip.wolf.text": "Obtain this item",
+  "advancements.tooltip.wolf.hand": "One Leaf Boat",
+  "seeking_immortals.jei.item.seeking_immortals.wolf": "Have your wolf kill the Warden",
+
+
 
   "item.seeking_immortals.nightmare_base": "§4Nightmare Base",
   "item.nightmare_base.tool.string": "-15% damage,health,armor",
@@ -262,7 +273,7 @@
   "advancements.tooltip.nightmare_base_insight_collapse.text": "Obtain this item",
   "advancements.tooltip.nightmare_base_insight_collapse.hand": "Strength of Collapse",
 
-  "seeking_immortals.jei.item.seeking_immortals.nightmare_base_insight_drug": "Complete all tasks in the medicine box",
+  "seeking_immortals.jei.item.seeking_immortals.nightmare_base_insight_drug": "Given when the player has 9 different positive potion statuses",
   "seeking_immortals.jei.item.seeking_immortals.nightmare_base_insight_insane": "Die or jump into the End portal to return to the Overworld",
   "seeking_immortals.jei.item.seeking_immortals.nightmare_base_insight_collapse": "Kill the Ender Dragon",
 
@@ -336,8 +347,22 @@
 
 
 
+  "item.seeking_immortals.falling_immortals":"§4Falling Immortals",
+  "item.falling_immortals.tool.string.1": "You will no longer be subject to any form of property bonus or reduction",
+  "item.falling_immortals.tool.string.2": "damage fixed at 15",
+  "item.falling_immortals.tool.string.3": "Attack speed fixed at 4",
+  "item.falling_immortals.tool.string.4":"Max health is fixed at 30",
+  "item.falling_immortals.tool.string.5":"Damage taken is fixed at 2",
+  "item.falling_immortals.tool.string.6":"Armor is fixed at 10",
 
-"item.seeking_immortals.hypocritical_self_esteem":"§4Hypocritical Self-Esteem",
+  "seeking_immortals.jei.item.seeking_immortals.falling_immortals": "在佩戴倾斜异果的情况下主手手持末影之眼杀死凋零获取（实际上它会直接替换倾斜异果为坠仙）",
+  "advancements.tooltip.falling_immortals.text": "Obtain this item",
+  "advancements.tooltip.falling_immortals.hand": "希望之火的熄灭",
+
+
+
+
+  "item.seeking_immortals.hypocritical_self_esteem":"§4Hypocritical Self-Esteem",
 "item.hypocritical_self_esteem.tool.string": "You will gain the following boosts for each entity nearby.",
 "item.hypocritical_self_esteem.tool.string.1": "If you have suffered the curse of Malevolent Gaze.. then:",
 "item.hypocritical_self_esteem.tool.string.2": "   Bite nearby creatures, dealing 20% of your displayed damage every 0.5 seconds",
@@ -360,6 +385,29 @@
   "advancements.tooltip.nightmare_base_start_pod.text": "Obtain this item",
   "advancements.tooltip.nightmare_base_start_pod.hand": "Immortal Flower, Immortal Fruit",
 
+  "item.seeking_immortals.disintegrating_stone":"§4 Split Stone",
+  "item.disintegrating_stone.tool.string": "This item's stats increase as you install more mods",
+  "item.disintegrating_stone.tool.string.1": "Cosmetic items from any mod will be neutralized",
+  "item.disintegrating_stone.tool.string.2": "The upper limit is 1800%",
+  "advancements.tooltip.disintegrating_stone.text": "Get this item",
+  "advancements.tooltip.disintegrating_stone.hand": "The sky is falling apart",
+
+  "item.seeking_immortals.defend_against_runestone":"§4抵御符石",
+  "item.defend_against_runestone.tool.string.1": "受击时有概率获得抗性II",
+  "item.defend_against_runestone.tool.string.2": "攻击时有概率对目标造成虚弱II",
+
+
+  "item.seeking_immortals.revive_runestone":"§4复苏符石",
+  "item.revive_runestone.tool.string.1": "受伤有概率吸收伤害",
+  "item.revive_runestone.tool.string.2": "攻击有概率吸取生命",
+
+  "item.seeking_immortals.strengthen_runestone":"§4强化符石",
+  "item.strengthen_runestone.tool.string.1": "攻击有概率获得力量II",
+  "item.strengthen_runestone.tool.string.2": "受伤有概率反弹伤害",
+
+  "seeking_immortals.jei.item.seeking_immortals.defend_against_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
+  "seeking_immortals.jei.item.seeking_immortals.revive_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
+  "seeking_immortals.jei.item.seeking_immortals.strengthen_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
 
   "item.seeking_immortals.nightmare_base_start_egg":"§4Origin Egg",
   "item.nightmare_base_start_egg.tool.string": "Luck +10",

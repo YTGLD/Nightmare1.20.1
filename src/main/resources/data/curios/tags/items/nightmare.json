@@ -35,12 +35,22 @@
     "seeking_immortals:nightmare_base_start_pod",
     "seeking_immortals:nightmare_base_start_egg",
     "seeking_immortals:nightmare_base_start_power",
+    "seeking_immortals:wolf",
 
     "seeking_immortals:tricky_puppets",
     "seeking_immortals:end_bone",
     "seeking_immortals:candle",
     "seeking_immortals:apple",
     "seeking_immortals:ring",
-    "seeking_immortals:hypocritical_self_esteem"
+    "seeking_immortals:hypocritical_self_esteem",
+
+    "seeking_immortals:falling_immortals",
+
+    "seeking_immortals:disintegrating_stone",
+
+
+    "seeking_immortals:defend_against_runestone",
+    "seeking_immortals:revive_runestone",
+    "seeking_immortals:strengthen_runestone"
   ]
 }

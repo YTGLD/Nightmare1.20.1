@@ -5,6 +5,8 @@ import com.ytgld.seeking_immortals.SeekingImmortalsMod;
 import com.ytgld.seeking_immortals.init.AttReg;
 import com.ytgld.seeking_immortals.init.Effects;
 import com.ytgld.seeking_immortals.init.Items;
+import com.ytgld.seeking_immortals.item.nightmare.base.strengthen_runestone;
+import com.ytgld.seeking_immortals.item.nightmare.falling_immortals;
 import com.ytgld.seeking_immortals.item.nightmare.immortal;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.INightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.SuperNightmare;
@@ -21,6 +23,7 @@ import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.redemption.nig
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.reversal.candle;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.reversal.nightmare_base_reversal_orb;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.start.nightmare_base_start_pod;
+import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.start.wolf;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.stone.end_bone;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.stone.nightmare_base_stone_brain;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.stone.nightmare_base_stone_virus;
@@ -66,9 +69,10 @@ public class NewEvent {
 
     @SubscribeEvent
     public void LivingHealEvent(LivingDeathEvent event) {
+        falling_immortals.dieEqItem(event);
         nightmare_base_reversal.LivingDeathEvent(event);
         immortal.livDead(event);
-
+        wolf.kill(event);
         nightmare_base_black_eye_red.kill(event);
         nightmare_base_insight_insane.LivingDeathEvents(event);
 
@@ -76,8 +80,12 @@ public class NewEvent {
 
     @SubscribeEvent
     public void LivingHurtEvent(LivingHurtEvent event) {
-
+        falling_immortals.damage(event);
+        apple.damage(event);
         nightmare_base_stone_virus.h(event);
+        strengthen_runestone.hurt(event);
+        strengthen_runestone.hurt(event);
+        strengthen_runestone.hurt(event);
         nightmare_base_black_eye_eye.attLook(event);
         nightmare_base_black_eye_heart.hurt(event);
         nightmare_base_stone.LivingHurtEvent(event);
@@ -89,9 +97,8 @@ public class NewEvent {
         nightmare_base_start_pod.damage(event);
         end_bone.hurts(event);
         candle.hurt(event);
-        apple.damage(event);
         immortal.hEvt(event);
-
+        wolf.attack(event);
         if (event.getEntity().hasEffect(Effects.dead.get()) && event.getEntity().getEffect(Effects.dead.get()) != null) {
             float lvl = event.getEntity().getEffect(Effects.dead.get()).getAmplifier();
             lvl *= 0.2f;

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "seeking_immortals:nightmare_base_black_eye_eye"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_black_eye_heart"
+    },
+    {
+      "item": "seeking_immortals:nightmare_base_black_eye_red"
+    }
+  ],
+  "result": {
+    "item": "seeking_immortals:nightmare_base_stone"
+  }
+}

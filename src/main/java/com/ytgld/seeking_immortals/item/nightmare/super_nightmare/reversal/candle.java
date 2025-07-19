@@ -46,7 +46,7 @@ public class candle  extends nightmare implements SuperNightmare {
         if (event.getSource().getEntity() instanceof Player player) {
             if (Handler.hascurio(player, Items.candle.get())){
                 if (player.invulnerableTime>0){
-                    event.setAmount(event.getAmount()*2);
+                    event.setAmount(event.getAmount()*1.2f);
                 }
             }
         }
