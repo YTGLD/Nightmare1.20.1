@@ -3,6 +3,8 @@ package com.ytgld.seeking_immortals.mixin;
 import com.ytgld.seeking_immortals.Handler;
 import com.ytgld.seeking_immortals.init.Items;
 import net.minecraft.core.Holder;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,6 +44,15 @@ public abstract class LivingEntityMixin {
             cir.setReturnValue(this.getAttributeBaseValue(attribute));
         }
 
+    }
+    @Inject(at = @At("RETURN"), method = "canBeAffected", cancellable = true)
+    private void canBeAffected(MobEffectInstance effectInstance, CallbackInfoReturnable<Boolean> cir){
+        LivingEntity living = (LivingEntity) (Object) this;
+        if (Handler.hascurio(living, Items.nightmare_base_black_eye.get())) {
+            if (effectInstance.getEffect()==(MobEffects.BLINDNESS)||effectInstance.getEffect() ==(MobEffects.DARKNESS)) {
+                cir.setReturnValue(false);
+            }
+        }
     }
     @Inject(at = @At("RETURN"), method = "getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D", cancellable = true)
     private void getAttributeValue2(Attribute p_21134_, CallbackInfoReturnable<Double> cir) {

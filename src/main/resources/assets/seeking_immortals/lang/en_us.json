@@ -395,7 +395,15 @@
   "item.seeking_immortals.defend_against_runestone":"§4抵御符石",
   "item.defend_against_runestone.tool.string.1": "受击时有概率获得抗性II",
   "item.defend_against_runestone.tool.string.2": "攻击时有概率对目标造成虚弱II",
-
+"item.seeking_immortals.blood_god":"§4 Divine Blood Ancestor Talisman",
+  "item.blood_god.tool.string.1": "Increases maximum health by 25%",
+  "item.blood_god.tool.string.2": "Increases health regeneration by 40%",
+  "item.blood_god.tool.string.3": "Increases the speed of drinking potions by 25%",
+  "item.blood_god.tool.string.4": "You take up to 5 damage",
+  "item.blood_god.tool.string.5": "Damage over 5 will be converted to an equal amount of bleeding",
+  "item.blood_god.tool.string.6": "Drinking healing potions reduces bleeding damage to 50% of its original value",
+  "item.blood_god.tool.string.7": "Drinking potion reduces bleed damage to 95% of its original size",
+  "item.blood_god.tool.string.8": "30 second cooldown",
 
   "item.seeking_immortals.revive_runestone":"§4复苏符石",
   "item.revive_runestone.tool.string.1": "受伤有概率吸收伤害",
@@ -408,6 +416,7 @@
   "seeking_immortals.jei.item.seeking_immortals.defend_against_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
   "seeking_immortals.jei.item.seeking_immortals.revive_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
   "seeking_immortals.jei.item.seeking_immortals.strengthen_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
+  "effect.seeking_immortals.invulnerable": "invulnerable",
 
   "item.seeking_immortals.nightmare_base_start_egg":"§4Origin Egg",
   "item.nightmare_base_start_egg.tool.string": "Luck +10",

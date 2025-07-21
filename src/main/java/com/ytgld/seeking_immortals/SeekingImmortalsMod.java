@@ -5,10 +5,12 @@ import com.mojang.logging.LogUtils;
 import com.ytgld.seeking_immortals.event.old.AdvancementEvt;
 import com.ytgld.seeking_immortals.event.old.NewEvent;
 import com.ytgld.seeking_immortals.init.*;
+import com.ytgld.seeking_immortals.item.nightmare.ToolTip;
 import com.ytgld.seeking_immortals.renderer.MRender;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.minecraftforge.client.event.RegisterShadersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,6 +23,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 import java.io.IOException;
+import java.util.function.Function;
 
 @Mod(SeekingImmortalsMod.MODID)
 public class SeekingImmortalsMod
@@ -45,6 +48,10 @@ public class SeekingImmortalsMod
 
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
+        @SubscribeEvent
+        public static void RegisterClientTooltipComponentFactoriesEvent(RegisterClientTooltipComponentFactoriesEvent event){
+            event.register(ToolTip.class, Function.identity());
+        }
         @SubscribeEvent
         public static void EntityRenderersEvent(RegisterShadersEvent event) {
             try {

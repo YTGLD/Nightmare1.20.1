@@ -5,9 +5,11 @@ import com.ytgld.seeking_immortals.SeekingImmortalsMod;
 import com.ytgld.seeking_immortals.init.AttReg;
 import com.ytgld.seeking_immortals.init.Effects;
 import com.ytgld.seeking_immortals.init.Items;
+import com.ytgld.seeking_immortals.item.nightmare.AllTip;
 import com.ytgld.seeking_immortals.item.nightmare.base.strengthen_runestone;
 import com.ytgld.seeking_immortals.item.nightmare.falling_immortals;
 import com.ytgld.seeking_immortals.item.nightmare.immortal;
+import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.*;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.INightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.SuperNightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.eye.nightmare_base_black_eye_eye;
@@ -16,9 +18,6 @@ import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.eye.nightmare_
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.fool.apple;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.fool.nightmare_base_fool_bone;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.insight.nightmare_base_insight_insane;
-import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.nightmare_base_reversal;
-import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.nightmare_base_start;
-import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.nightmare_base_stone;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.redemption.nightmare_base_redemption_deception;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.reversal.candle;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.reversal.nightmare_base_reversal_orb;
@@ -38,9 +37,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RenderTooltipEvent;
-import net.minecraftforge.event.entity.living.LivingDeathEvent;
-import net.minecraftforge.event.entity.living.LivingHealEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -55,7 +53,15 @@ import java.util.Random;
 
 public class NewEvent {
 
-
+    public static float time= 0;
+    @SubscribeEvent
+    public void tick(TickEvent.LevelTickEvent event){
+        time++;
+    }
+    @SubscribeEvent
+    public  void LivingExperienceDropEvent(LivingExperienceDropEvent event) {
+        nightmare_base_insight.exp(event);
+    }
     @SubscribeEvent
     public void LivingHealEvent(LivingHealEvent event) {
         nightmare_base_reversal_orb.LivingHealEvent(event);
@@ -134,7 +140,14 @@ public class NewEvent {
 
 
     }
-
+    @SubscribeEvent
+    public void LivingDamageEvent(LivingDamageEvent event){
+        blood_god.hurtOfBlood(event);
+    }
+    @SubscribeEvent
+    public void Start(LivingEntityUseItemEvent.Start event){
+        blood_god.hurtOfBlood(event);
+    }
     @SubscribeEvent
     public  void PlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
@@ -173,6 +186,10 @@ public class NewEvent {
     @SubscribeEvent
     public void hurt(ItemTooltipEvent event) {
 
+        if (event.getItemStack().getItem() instanceof AllTip){
+            event.getToolTip().add(1, Component.translatable(
+                    "key.keyboard.left.shift").withStyle(Style.EMPTY.withColor(TextColor.fromRgb(0XFFCD853F))));
+        }
         if (!Handler.hascurio(event.getEntity(), Items.nightmare_base.get())) {
             if (event.getItemStack().getItem() instanceof SuperNightmare) {
                 List<Component> toolTip = event.getToolTip();

@@ -5,32 +5,55 @@ import com.google.common.collect.Multimap;
 import com.ytgld.seeking_immortals.Config;
 import com.ytgld.seeking_immortals.Handler;
 import com.ytgld.seeking_immortals.event.old.AdvancementEvt;
+import com.ytgld.seeking_immortals.init.Effects;
 import com.ytgld.seeking_immortals.init.Items;
+import com.ytgld.seeking_immortals.item.nightmare.AllTip;
+import com.ytgld.seeking_immortals.item.nightmare.ToolTip;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.SuperNightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.nightmare;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.inventory.ICurioStacksHandler;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
-public class nightmare_base_reversal extends nightmare implements SuperNightmare {
+public class nightmare_base_reversal extends nightmare implements SuperNightmare, AllTip {
+    @Override
+    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        return Optional.of(new ToolTip(this,stack));
+    }
 
+    @Override
+    public Map<Integer, String> tooltip() {
+        Map<Integer,String> map = new HashMap<>();
+        map.put(1,"轮回之路注定坎坷");
+        map.put(2,"复活时给予十秒无敌");
+        return map;
+    }
+
+    @Override
+    public Map<Integer, String> element(ItemStack stack) {
+        Map<Integer,String> map = new HashMap<>();
+        map.put(1,"轮回之路注定坎坷");
+        map.put(2,"复活时给予十秒无敌");
+        return map;
+    }
 
     public static final String att = "Attrib";
 
@@ -78,6 +101,8 @@ public class nightmare_base_reversal extends nightmare implements SuperNightmare
         if (!slotContext.entity().level().isClientSide) {
             if (slotContext.entity().tickCount>=20) {
                 slotContext.entity().getAttributes().addTransientAttributeModifiers(geta(stack));
+            }else {
+                slotContext.entity().addEffect(new MobEffectInstance(Effects.invulnerable.get(),200,0,false,false,false));
             }
         }
         if (slotContext.entity().hasEffect(MobEffects.POISON)) {

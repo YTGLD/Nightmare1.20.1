@@ -4,25 +4,50 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ytgld.seeking_immortals.Config;
 import com.ytgld.seeking_immortals.Handler;
+import com.ytgld.seeking_immortals.init.AttReg;
 import com.ytgld.seeking_immortals.init.Items;
+import com.ytgld.seeking_immortals.item.nightmare.AllTip;
+import com.ytgld.seeking_immortals.item.nightmare.ToolTip;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.SuperNightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.nightmare;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-public class nightmare_base_start extends nightmare implements SuperNightmare {
+public class nightmare_base_start extends nightmare implements SuperNightmare , AllTip {
+    @Override
+    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        return Optional.of(new ToolTip(this,stack));
+    }
+
+    @Override
+    public Map<Integer, String> tooltip() {
+        Map<Integer,String> map = new HashMap<>();
+        map.put(1,"你被赐予了异常的恢复能力");
+        map.put(2,"增加百分之五十治疗");
+        return map;
+    }
+
+    @Override
+    public Map<Integer, String> element(ItemStack stack) {
+        Map<Integer,String> map = new HashMap<>();
+        map.put(1,"你被赐予了异常的恢复能力");
+        map.put(2,"增加百分之五十治疗");
+        return map;
+    }
     @Override
     public boolean canUnequip(SlotContext slotContext, ItemStack stack) {
         if (slotContext.entity() instanceof Player player){
@@ -69,6 +94,7 @@ public class nightmare_base_start extends nightmare implements SuperNightmare {
 
         linkedHashMultimap.put(Attributes.ARMOR, new AttributeModifier(
                 UUID.fromString("d6a27da3-8d8c-4e36-8a89-807355ee9849"),"a", -d, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        linkedHashMultimap.put(AttReg.heal.get(), new AttributeModifier(UUID.fromString("05a2b883-672c-35b9-82ec-eccc4e0cabc2"),"asiodnm", 0.5f, AttributeModifier.Operation.MULTIPLY_TOTAL));
         return linkedHashMultimap;
     }
 

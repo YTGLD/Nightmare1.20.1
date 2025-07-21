@@ -626,8 +626,7 @@ public class AdvancementEvt {
             if (Handler.hascurio(player, Items.nightmare_base_black_eye.get())){
                 if (player.hasEffect(MobEffects.POISON)
                         && player.hasEffect(MobEffects.WITHER)
-                        && player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)
-                        && player.hasEffect(MobEffects.BLINDNESS)){
+                        && player.hasEffect(MobEffects.MOVEMENT_SLOWDOWN)){
                     if (player.getRemainingFireTicks() > 0){
                         CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
                             Map<String, ICurioStacksHandler> curios = handler.getCurios();

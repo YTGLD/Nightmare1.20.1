@@ -85,6 +85,7 @@ public class Items {
     public static final RegistryObject<Item> disintegrating_stone =REGISTRY.register("disintegrating_stone", disintegrating_stone::new);
     public static final RegistryObject<Item> strengthen_runestone =REGISTRY.register("strengthen_runestone", strengthen_runestone::new);
     public static final RegistryObject<Item> defend_against_runestone =REGISTRY.register("defend_against_runestone", defend_against_runestone::new);
+    public static final RegistryObject<Item> blood_god =REGISTRY.register("blood_god", blood_god::new);
 
     public static final RegistryObject<Item> nightmare_base_start_power =REGISTRY.register("nightmare_base_start_power", nightmare_base_start_power::new);
     public static final RegistryObject<Item> tricky_puppets =REGISTRY.register("tricky_puppets", tricky_puppets::new);

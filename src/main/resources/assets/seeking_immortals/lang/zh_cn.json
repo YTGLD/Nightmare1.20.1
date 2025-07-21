@@ -95,7 +95,7 @@
 
   "seeking_immortals.jei.item.seeking_immortals.nightmare_base.all": "，需要佩戴:",
 
-  "seeking_immortals.jei.item.seeking_immortals.nightmare_base_black_eye_heart": "在同时满足下列条件时触发不死图腾获取：中毒,凋零,缓慢,失明并且着火",
+  "seeking_immortals.jei.item.seeking_immortals.nightmare_base_black_eye_heart": "在同时满足下列条件时触发不死图腾获取：中毒,凋零,缓慢并且着火",
   "seeking_immortals.jei.item.seeking_immortals.nightmare_base_black_eye_eye": "杀死坚守者",
   "seeking_immortals.jei.item.seeking_immortals.nightmare_base_black_eye_red": "发现在古城，概率在5%左右",
 
@@ -423,7 +423,17 @@
   "seeking_immortals.jei.item.seeking_immortals.defend_against_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
   "seeking_immortals.jei.item.seeking_immortals.revive_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
   "seeking_immortals.jei.item.seeking_immortals.strengthen_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
+  "effect.seeking_immortals.invulnerable": "无懈可击",
 
+  "item.seeking_immortals.blood_god":"§4神血祖符",
+  "item.blood_god.tool.string.1": "增加25%最大生命值",
+  "item.blood_god.tool.string.2": "增加40%生命恢复",
+  "item.blood_god.tool.string.3": "饮用药水的速度增加25%",
+  "item.blood_god.tool.string.4": "你最高受到5点伤害",
+  "item.blood_god.tool.string.5": "超过5点的伤害将转换成等数值的流血",
+  "item.blood_god.tool.string.6": "饮用治疗药水使流血伤害削弱至原先的50%",
+  "item.blood_god.tool.string.7": "饮用药水使流血伤害削弱至原先的95%",
+  "item.blood_god.tool.string.8": "30秒冷却",
   "item.seeking_immortals.wolf":"§4孤狼",
   "item.wolf.tool.string": "每杀死一种生物都会增加你1点生命和护甲",
   "item.wolf.tool.string.1": "你对曾被你杀死的生物造成额外25%的伤害",
