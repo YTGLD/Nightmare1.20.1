@@ -20,6 +20,7 @@ public class Tab {
                 b.accept(new ItemStack(Items.immortal.get()));
                 b.accept(new ItemStack(Items.falling_immortals.get()));
                 b.accept(new ItemStack(Items.blood_god.get()));
+                b.accept(new ItemStack(Items.lead.get()));
 
                 b.accept(new ItemStack(Items.defend_against_runestone.get()));
                 b.accept(new ItemStack(Items.revive_runestone.get()));

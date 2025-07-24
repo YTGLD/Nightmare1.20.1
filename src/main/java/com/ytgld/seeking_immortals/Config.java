@@ -33,6 +33,13 @@ public class Config {
                 give_nightmare_base_insight_drug = BUILDER
                         .comment("疯狂灵药获取时要求的药水数量")
                         .defineInRange("give_nightmare_base_insight_drug", 9,1,100);
+
+                blood_god_kill = BUILDER.comment("神血祖符需要的击杀数")
+                        .defineInRange("blood_god_kill", 500,1,Integer.MAX_VALUE);
+                blood_god_heal = BUILDER.comment("神血祖符需要的治疗量")
+                        .defineInRange("blood_god_heal", 5000,1,Integer.MAX_VALUE);
+                blood_god_damage = BUILDER.comment("神血祖符需要的造成伤害")
+                        .defineInRange("blood_god_damage", 10000,1,Integer.MAX_VALUE);
                 BUILDER.pop();
 
             }
@@ -112,23 +119,18 @@ public class Config {
 
         }
 
-        {
-            BUILDER.push("测试");
-            x = BUILDER.comment("x")
-                    .defineInRange("x", 0, -360f, 360f);
-            y = BUILDER.comment("y")
-                    .defineInRange("y", 0, -360f, 360f);
-            z = BUILDER.comment("z")
-                    .defineInRange("z", 0, -360f, 360f);
-
-
-            BUILDER.pop();
-        }
 
 
 
         BUILDER.build();
     }
+
+
+
+    public   ForgeConfigSpec.IntValue blood_god_kill ;
+    public   ForgeConfigSpec.IntValue blood_god_heal ;
+    public   ForgeConfigSpec.IntValue blood_god_damage ;
+
 
 
     public   ForgeConfigSpec.IntValue Nightecora ;
@@ -145,12 +147,6 @@ public class Config {
 
 
     public   ForgeConfigSpec.IntValue nightmareBaseMaxItem ;
-
-
-    public   ForgeConfigSpec.DoubleValue x ;
-    public   ForgeConfigSpec.DoubleValue y ;
-    public   ForgeConfigSpec.DoubleValue z ;
-
 
 
     @SubscribeEvent

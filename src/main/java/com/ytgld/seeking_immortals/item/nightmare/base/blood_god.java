@@ -1,6 +1,7 @@
-package com.ytgld.seeking_immortals.item.nightmare.super_nightmare;
+package com.ytgld.seeking_immortals.item.nightmare.base;
 
 import com.google.common.collect.Multimap;
+import com.ytgld.seeking_immortals.Handler;
 import com.ytgld.seeking_immortals.init.AttReg;
 import com.ytgld.seeking_immortals.init.Items;
 import com.ytgld.seeking_immortals.item.nightmare.AllTip;
@@ -15,16 +16,15 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PotionItem;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingHealEvent;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
@@ -58,71 +58,85 @@ public class blood_god  extends nightmare implements SuperNightmare, AllTip {
     public static final String bloodDamage = "bloodDamage";
 
 
+    public static final String giveName_kill = "giveName_kill";
+    public static final String giveName_heal = "giveName_heal";
+    public static final String giveName_damage = "giveName_damage";
+    public static final String give_End = "give_End";
+
+
+
 
     @Override
     public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         return Optional.of(new ToolTip(this,stack));
     }
+
+
+
     public static void hurtOfBlood(LivingEntityUseItemEvent.Start event){
         if (event.getItem().getUseAnimation() == UseAnim.DRINK) {
             if (event.getEntity() instanceof Player player) {
-                CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
-                    Map<String, ICurioStacksHandler> curios = handler.getCurios();
-                    for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
-                        ICurioStacksHandler stacksHandler = entry.getValue();
-                        IDynamicStackHandler stackHandler = stacksHandler.getStacks();
-                        for (int i = 0; i < stacksHandler.getSlots(); i++) {
-                            ItemStack stack = stackHandler.getStackInSlot(i);
-                            if (stack.is(Items.blood_god.get())) {
-                                CompoundTag compoundTag = stack.getTag();
-                                if (compoundTag != null) {
-                                    event.setDuration((int) (event.getDuration()*0.7f));
-                                    if (!player.getCooldowns().isOnCooldown(Items.blood_god.get())) {
-                                        if (compoundTag.getFloat(bloodDamage) > 0) {
-                                            if (event.getItem().getItem() instanceof PotionItem potionItem) {
-                                                Potion potion = PotionUtils.getPotion(potionItem.getDefaultInstance());
-                                                if (potion.getEffects().stream().anyMatch(effect -> effect.getEffect().equals(MobEffects.HEAL))) {
-                                                    compoundTag.putFloat(bloodDamage, compoundTag.getFloat(bloodDamage) * 0.5F);
-                                                } else {
-                                                    compoundTag.putFloat(bloodDamage, compoundTag.getFloat(bloodDamage) * 0.95f);
+                if (Handler.hascurio(player,Items.blood_god.get())) {
+                    CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
+                        Map<String, ICurioStacksHandler> curios = handler.getCurios();
+                        for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
+                            ICurioStacksHandler stacksHandler = entry.getValue();
+                            IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                            for (int i = 0; i < stacksHandler.getSlots(); i++) {
+                                ItemStack stack = stackHandler.getStackInSlot(i);
+                                if (stack.is(Items.blood_god.get())) {
+                                    CompoundTag compoundTag = stack.getTag();
+                                    if (compoundTag != null) {
+                                        event.setDuration((int) (event.getDuration() * 0.7f));
+                                        if (!player.getCooldowns().isOnCooldown(Items.blood_god.get())) {
+                                            if (compoundTag.getFloat(bloodDamage) > 0) {
+                                                if (event.getItem().getItem() instanceof PotionItem potionItem) {
+                                                    Potion potion = PotionUtils.getPotion(potionItem.getDefaultInstance());
+                                                    if (potion.getEffects().stream().anyMatch(effect -> effect.getEffect().equals(MobEffects.HEAL))) {
+                                                        compoundTag.putFloat(bloodDamage, compoundTag.getFloat(bloodDamage) * 0.5F);
+                                                    } else {
+                                                        compoundTag.putFloat(bloodDamage, compoundTag.getFloat(bloodDamage) * 0.95f);
+                                                    }
+                                                    player.getCooldowns().addCooldown(Items.blood_god.get(), 600);
                                                 }
-                                                player.getCooldowns().addCooldown(Items.blood_god.get(),600);
                                             }
                                         }
                                     }
                                 }
                             }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     }
     public static void hurtOfBlood(LivingDamageEvent event){
         if (!event.getSource().is(DamageTypes.GENERIC_KILL)) {
-            if (event.getEntity() instanceof Player player) {
-                CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
-                    Map<String, ICurioStacksHandler> curios = handler.getCurios();
-                    for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
-                        ICurioStacksHandler stacksHandler = entry.getValue();
-                        IDynamicStackHandler stackHandler = stacksHandler.getStacks();
-                        for (int i = 0; i < stacksHandler.getSlots(); i++) {
-                            ItemStack stack = stackHandler.getStackInSlot(i);
-                            if (stack.is(Items.blood_god.get())) {
-                                CompoundTag compoundTag = stack.getTag();
-                                if (compoundTag != null) {
-                                    float s = event.getAmount() - 5;
-                                    if (s <= 5) {
-                                    } else {
-                                        compoundTag.putFloat(bloodDamage, compoundTag.getFloat(bloodDamage) + s);
-                                        compoundTag.putInt(bloodTime, TIME);
-                                        event.setAmount(5);
+            if (event.getEntity() instanceof Player player){
+                if (Handler.hascurio(player,Items.blood_god.get())) {
+                    CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
+                        Map<String, ICurioStacksHandler> curios = handler.getCurios();
+                        for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
+                            ICurioStacksHandler stacksHandler = entry.getValue();
+                            IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                            for (int i = 0; i < stacksHandler.getSlots(); i++) {
+                                ItemStack stack = stackHandler.getStackInSlot(i);
+                                if (stack.is(Items.blood_god.get())) {
+                                    CompoundTag compoundTag = stack.getTag();
+                                    if (compoundTag != null) {
+                                        float s = event.getAmount() - 5;
+                                        if (s <= 5) {
+                                        } else {
+                                            compoundTag.putFloat(bloodDamage, compoundTag.getFloat(bloodDamage) + s);
+                                            compoundTag.putInt(bloodTime, TIME);
+                                            event.setAmount(5);
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     }

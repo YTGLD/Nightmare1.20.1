@@ -39,6 +39,9 @@ public class nightmare_base_stone extends nightmare implements SuperNightmare, A
                 if (Handler.hascurio(player,Items.candle.get())){
                     return;
                 }
+                if (Handler.hascurio(player, Items.blood_god.get())) {
+                    return;
+                }
                 if (player.getHealth() >= player.getMaxHealth()) {
 
                     double d = Config.SERVER.nightmare_base_stone.get();

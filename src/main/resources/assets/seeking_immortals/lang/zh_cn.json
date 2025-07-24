@@ -434,6 +434,18 @@
   "item.blood_god.tool.string.6": "饮用治疗药水使流血伤害削弱至原先的50%",
   "item.blood_god.tool.string.7": "饮用药水使流血伤害削弱至原先的95%",
   "item.blood_god.tool.string.8": "30秒冷却",
+  "seeking_immortals.jei.item.seeking_immortals.blood_god": "需要500击杀数，5000治疗量，10000造成伤害获取",
+
+  "item.seeking_immortals.lead":"§4罡风重铅",
+  "item.lead.tool.string.1" : "连续受到伤害时逐渐提高抗性",
+  "item.lead.tool.string.2" :"每次提升3%，但不超过30%",
+  "item.lead.tool.string.3" : "若10秒未受到伤害",
+  "item.lead.tool.string.4" :"则以每秒20点的速度恢复护体罡气",
+  "item.lead.tool.string.5" : "最多恢复至最大生命值的50%",
+  "item.lead.tool.string.6" :"受伤优先损耗罡气而非生命值",
+  "item.lead.tool.string.7" : "护体结界崩碎时对攻击者造成伤害",
+  "seeking_immortals.jei.item.seeking_immortals.lead": "死亡200次",
+
   "item.seeking_immortals.wolf":"§4孤狼",
   "item.wolf.tool.string": "每杀死一种生物都会增加你1点生命和护甲",
   "item.wolf.tool.string.1": "你对曾被你杀死的生物造成额外25%的伤害",

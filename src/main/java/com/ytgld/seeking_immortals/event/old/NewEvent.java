@@ -6,6 +6,8 @@ import com.ytgld.seeking_immortals.init.AttReg;
 import com.ytgld.seeking_immortals.init.Effects;
 import com.ytgld.seeking_immortals.init.Items;
 import com.ytgld.seeking_immortals.item.nightmare.AllTip;
+import com.ytgld.seeking_immortals.item.nightmare.base.blood_god;
+import com.ytgld.seeking_immortals.item.nightmare.base.lead;
 import com.ytgld.seeking_immortals.item.nightmare.base.strengthen_runestone;
 import com.ytgld.seeking_immortals.item.nightmare.falling_immortals;
 import com.ytgld.seeking_immortals.item.nightmare.immortal;
@@ -67,6 +69,7 @@ public class NewEvent {
         nightmare_base_reversal_orb.LivingHealEvent(event);
         nightmare_base_black_eye_heart.heal(event);
         candle.heal(event);
+        nightmare_base.healGive(event);
         if (event.getEntity().getAttribute(AttReg.heal.get())!=null){
             float attack = (float) event.getEntity().getAttribute(AttReg.heal.get()).getValue();
             event.setAmount(event.getAmount()*(attack));
@@ -81,11 +84,13 @@ public class NewEvent {
         wolf.kill(event);
         nightmare_base_black_eye_red.kill(event);
         nightmare_base_insight_insane.LivingDeathEvents(event);
-
+        nightmare_base.killGive(event);
+        nightmare_base.die(event);
     }
 
     @SubscribeEvent
     public void LivingHurtEvent(LivingHurtEvent event) {
+        lead.hurtOfBlood(event);
         falling_immortals.damage(event);
         apple.damage(event);
         nightmare_base_stone_virus.h(event);
@@ -105,6 +110,7 @@ public class NewEvent {
         candle.hurt(event);
         immortal.hEvt(event);
         wolf.attack(event);
+
         if (event.getEntity().hasEffect(Effects.dead.get()) && event.getEntity().getEffect(Effects.dead.get()) != null) {
             float lvl = event.getEntity().getEffect(Effects.dead.get()).getAmplifier();
             lvl *= 0.2f;
@@ -143,6 +149,7 @@ public class NewEvent {
     @SubscribeEvent
     public void LivingDamageEvent(LivingDamageEvent event){
         blood_god.hurtOfBlood(event);
+        nightmare_base.damageGive(event);
     }
     @SubscribeEvent
     public void Start(LivingEntityUseItemEvent.Start event){

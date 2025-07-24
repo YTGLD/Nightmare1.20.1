@@ -392,9 +392,6 @@
   "advancements.tooltip.disintegrating_stone.text": "Get this item",
   "advancements.tooltip.disintegrating_stone.hand": "The sky is falling apart",
 
-  "item.seeking_immortals.defend_against_runestone":"§4抵御符石",
-  "item.defend_against_runestone.tool.string.1": "受击时有概率获得抗性II",
-  "item.defend_against_runestone.tool.string.2": "攻击时有概率对目标造成虚弱II",
 "item.seeking_immortals.blood_god":"§4 Divine Blood Ancestor Talisman",
   "item.blood_god.tool.string.1": "Increases maximum health by 25%",
   "item.blood_god.tool.string.2": "Increases health regeneration by 40%",
@@ -404,24 +401,45 @@
   "item.blood_god.tool.string.6": "Drinking healing potions reduces bleeding damage to 50% of its original value",
   "item.blood_god.tool.string.7": "Drinking potion reduces bleed damage to 95% of its original size",
   "item.blood_god.tool.string.8": "30 second cooldown",
+"seeking_immortals.jei.item.seeking_immortals.blood_god": "Requires 500 kills, 5000 healing, 10000 damage dealt",
 
-  "item.seeking_immortals.revive_runestone":"§4复苏符石",
-  "item.revive_runestone.tool.string.1": "受伤有概率吸收伤害",
-  "item.revive_runestone.tool.string.2": "攻击有概率吸取生命",
+"item.seeking_immortals.defend_against_runestone":"§4 Defend against runestones",
+  "item.defend_against_runestone.tool.string.1": "Chance to gain Resistance II when hit",
+  "item.defend_against_runestone.tool.string.2": "There is a chance to inflict weakness II on the target when attacking",
+  "item.seeking_immortals.revive_runestone":"§4 Revive Runestone",
+  "item.revive_runestone.tool.string.1": "Injury has a chance to absorb damage",
+  "item.revive_runestone.tool.string.2": "Attack has a chance to drain life",
+  "item.seeking_immortals.strengthen_runestone":"§4 Strengthening Runestone",
+  "item.strengthen_runestone.tool.string.1": "Attack has a chance to gain Strength II",
+  "item.strengthen_runestone.tool.string.2": "Injury has a chance to bounce back",
+  "seeking_immortals.jei.item.seeking_immortals.defend_against_runestone": "Found in dungeons and mines, 10% chance, one player can only get one",
+  "seeking_immortals.jei.item.seeking_immortals.revive_runestone": "Found in dungeons and mines, 10% chance, one player can only get one",
+  "seeking_immortals.jei.item.seeking_immortals.strengthen_runestone": "Found in dungeons and mines, 10% chance, only one player can get one",
 
-  "item.seeking_immortals.strengthen_runestone":"§4强化符石",
-  "item.strengthen_runestone.tool.string.1": "攻击有概率获得力量II",
-  "item.strengthen_runestone.tool.string.2": "受伤有概率反弹伤害",
 
-  "seeking_immortals.jei.item.seeking_immortals.defend_against_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
-  "seeking_immortals.jei.item.seeking_immortals.revive_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
-  "seeking_immortals.jei.item.seeking_immortals.strengthen_runestone": "发现在地牢和矿井，概率10%，一个玩家只能获得一个",
   "effect.seeking_immortals.invulnerable": "invulnerable",
 
   "item.seeking_immortals.nightmare_base_start_egg":"§4Origin Egg",
   "item.nightmare_base_start_egg.tool.string": "Luck +10",
   "item.nightmare_base_start_egg.tool.string.1": "All damage +20%",
   "item.nightmare_base_start_egg.tool.string.2": "Healing +50%",
+
+
+
+  "item.seeking_immortals.lead":"§4Wind heavy lead",
+  "item.lead.tool.string.1" : "Gradually increases resistance when taking damage in a row",
+  "item.lead.tool.string.2": "3% per boost, but not more than 30%",
+  "item.lead.tool.string.3" : "If no damage is taken for 10 seconds",
+  "item.lead.tool.string.4":"Then restores the body shield at a speed of 20 points per second",
+  "item.lead.tool.string.5" : "Restores up to 50% of maximum health",
+  "item.lead.tool.string.6" :"Injury prioritizes loss of energy over health",
+  "item.lead.tool.string.7" : "Damage to attackers when the shield is shattered",
+  "seeking_immortals.jei.item.seeking_immortals.lead": "Die 200 times",
+
+
+
+
+
 
   "advancements.tooltip.nightmare_base_start_egg.text": "Obtain this item",
   "advancements.tooltip.nightmare_base_start_egg.hand": "A lazy egg",
