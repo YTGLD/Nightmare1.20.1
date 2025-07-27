@@ -7,7 +7,6 @@ import com.ytgld.seeking_immortals.SeekingImmortalsMod;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.INightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.nightmare_base;
 import com.ytgld.seeking_immortals.renderer.MRender;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -47,8 +46,6 @@ public abstract class GuiGraphicsMixin {
         if (living != null) {
             if (stack.getItem() instanceof nightmare_base){
                 int tickCount = living.tickCount;
-
-
 
                 float[][] positions = {
                         {x - 8/10f, y - 8/10f},
@@ -92,10 +89,6 @@ public abstract class GuiGraphicsMixin {
     @Shadow public abstract void flush();
 
     @Shadow private boolean managed;
-
-    @Shadow @Final private Minecraft minecraft;
-
-    @Shadow public abstract PoseStack pose();
     @Inject(at = @At(value = "INVOKE",target = "Lnet/minecraft/client/gui/GuiGraphics;drawManaged(Ljava/lang/Runnable;)V"),method = "renderTooltipInternal(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;)V")
     public void moonstone$ClientTooltipPositioner(Font p_282675_, List<ClientTooltipComponent> p_282615_, int x, int y, ClientTooltipPositioner p_282442_, CallbackInfo ci) {
         moon1_21$drawManaged(()->{
@@ -124,8 +117,7 @@ public abstract class GuiGraphicsMixin {
             if (tooltipStack.getItem()instanceof INightmare){
                 this.pose.pushPose();
                 si1_21_4$renderTooltipBackground((GuiGraphics) (Object) this, l, i1, i, j, 400);
-                moonstone$renderTooltipBackground_nig((GuiGraphics)(Object)this, l, i1, i2, j2, 400, 0xff000000,0xff000000,0xff000000,0xff000000);
-
+                moonstone$renderTooltipBackground_nig(l, i1, i2, j2, 400, 0xff000000,0xff000000,0xff000000,0xff000000);
                 this.pose.popPose();
             }
         });
@@ -185,7 +177,7 @@ public abstract class GuiGraphicsMixin {
         guiGraphics.pose().popPose();
     }
     @Unique
-    private void moonstone$renderTooltipBackground_nig(GuiGraphics p_282666_, int p_281901_, int p_281846_, int p_281559_, int p_283336_, int p_283422_, int backgroundTop, int backgroundBottom, int borderTop, int borderBottom)
+    private void moonstone$renderTooltipBackground_nig(int p_281901_, int p_281846_, int p_281559_, int p_283336_, int p_283422_, int backgroundTop, int backgroundBottom, int borderTop, int borderBottom)
     {
         int i = p_281901_ - 3;
         int j = p_281846_ - 3;

@@ -138,7 +138,6 @@ public class lead  extends nightmare implements SuperNightmare, AllTip {
                         compoundTag.putInt(gang, compoundTag.getInt(gang) + 1);
                     }
                 }
-                System.out.println(compoundTag.getInt(gang));
             }
         }
     }

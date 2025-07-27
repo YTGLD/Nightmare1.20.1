@@ -46,37 +46,13 @@ public class nightmare_base extends nightmare {
 
 
         if (slotContext.entity() instanceof Player player) {
-            {
-                int killPlayer = player.getPersistentData().getInt(blood_god.giveName_kill);
-                Handler.addTagNumber(stack, blood_god.giveName_kill, player, killPlayer);
-                player.getPersistentData().putInt(blood_god.giveName_kill,0);
-            }
-            {
-                int killPlayer = player.getPersistentData().getInt(blood_god.giveName_heal);
-                Handler.addTagNumber(stack, blood_god.giveName_heal, player, killPlayer);
-                player.getPersistentData().putInt(blood_god.giveName_heal,0);
-            }
-            {
-                int killPlayer = player.getPersistentData().getInt(blood_god.giveName_damage);
-                Handler.addTagNumber(stack, blood_god.giveName_damage, player, killPlayer);
-                player.getPersistentData().putInt(blood_god.giveName_damage,0);
-            }
             int kill = Handler.getTagNumber(stack, blood_god.giveName_kill);
             int heal = Handler.getTagNumber(stack,blood_god.giveName_heal);
             int damage = Handler.getTagNumber(stack,blood_god.giveName_damage);
-
-            {
-                int killPlayer = player.getPersistentData().getInt(lead.dieGive);
-                Handler.addTagNumber(stack, lead.dieGive, player, killPlayer);
-                player.getPersistentData().putInt(lead.dieGive,0);
-            }
-
-            int die = Handler.getTagNumber(stack,lead.dieGive);
-
             if (stack.getTag()!=null) {
 
                 if (!stack.getTag().getBoolean(lead.gangBoolean)){
-                    if (die > 200) {
+                    if (Handler.getTagNumber(stack, lead.dieGive) > 200) {
                         player.addItem(new ItemStack(Items.lead.get()));
                         stack.getTag().putBoolean(lead.gangBoolean,true);
                     }
@@ -129,7 +105,7 @@ public class nightmare_base extends nightmare {
     }
     public static void healGive(LivingHealEvent event){
         if (event.getEntity() instanceof Player player) {
-            if (Handler.hascurio(player,Items.nightmare_base.get())&&!player.level().isClientSide) {
+            if (Handler.hascurio(player,Items.nightmare_base.get())) {
                 CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
                     Map<String, ICurioStacksHandler> curios = handler.getCurios();
                     for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
@@ -144,8 +120,7 @@ public class nightmare_base extends nightmare {
                                         if (s < 1) {
                                             s = 1;
                                         }
-                                        player.getPersistentData().putInt(blood_god.giveName_heal ,player.getPersistentData().getInt(blood_god.giveName_heal)+s);
-//                                        Handler.addTagNumber(stack, blood_god.giveName_heal, player, s);
+                                        Handler.addTagNumber(stack, blood_god.giveName_heal, player, s);
                                     }
                                 }
                             }
@@ -157,7 +132,7 @@ public class nightmare_base extends nightmare {
     }
     public static void damageGive(LivingDamageEvent event){
         if (event.getSource().getEntity() instanceof Player player) {
-            if (Handler.hascurio(player,Items.nightmare_base.get())&&!player.level().isClientSide) {
+            if (Handler.hascurio(player,Items.nightmare_base.get())) {
                 CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
                     Map<String, ICurioStacksHandler> curios = handler.getCurios();
                     for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
@@ -173,9 +148,7 @@ public class nightmare_base extends nightmare {
                                         if (s < 1) {
                                             s = 1;
                                         }
-                                        player.getPersistentData().putInt(blood_god.giveName_damage ,player.getPersistentData().getInt(blood_god.giveName_damage)+s);
-
-//                                        Handler.addTagNumber(stack, blood_god.giveName_damage, player, s);
+                                        Handler.addTagNumber(stack, blood_god.giveName_damage, player, s);
                                     }
                                 }
                             }
@@ -187,7 +160,7 @@ public class nightmare_base extends nightmare {
     }
     public static void killGive(LivingDeathEvent event){
         if (event.getSource().getEntity() instanceof Player player) {
-            if (Handler.hascurio(player,Items.nightmare_base.get())&&!player.level().isClientSide) {
+            if (Handler.hascurio(player,Items.nightmare_base.get())) {
                 CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
                     Map<String, ICurioStacksHandler> curios = handler.getCurios();
                     for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
@@ -198,8 +171,7 @@ public class nightmare_base extends nightmare {
                             if (stack.is(Items.nightmare_base.get())) {
                                 if (stack.getTag() != null) {
                                     if (!stack.getTag().getBoolean(blood_god.give_End)) {
-                                        player.getPersistentData().putInt(blood_god.giveName_kill ,player.getPersistentData().getInt(blood_god.giveName_kill)+1);
-//                                        Handler.addTagNumber(stack, blood_god.giveName_kill, player, 1);
+                                        Handler.addTagNumber(stack, blood_god.giveName_kill, player, 1);
                                     }
                                 }
                             }
@@ -211,7 +183,7 @@ public class nightmare_base extends nightmare {
     }
     public static void die(LivingDeathEvent event){
         if (event.getEntity() instanceof Player player) {
-            if (Handler.hascurio(player,Items.nightmare_base.get())&&!player.level().isClientSide) {
+            if (Handler.hascurio(player,Items.nightmare_base.get())) {
                 CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
                     Map<String, ICurioStacksHandler> curios = handler.getCurios();
                     for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
@@ -222,8 +194,7 @@ public class nightmare_base extends nightmare {
                             if (stack.is(Items.nightmare_base.get())) {
                                 if (stack.getTag() != null) {
                                     if (!stack.getTag().getBoolean(lead.dieGiveBoolean)) {
-                                        player.getPersistentData().putInt(lead.dieGive ,player.getPersistentData().getInt(lead.dieGive)+1);
-//                                        Handler.addTagNumber(stack, lead.dieGive, player, 1);
+                                        Handler.addTagNumber(stack, lead.dieGive, player, 1);
                                     }
                                 }
                             }

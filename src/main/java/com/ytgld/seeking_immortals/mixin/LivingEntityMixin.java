@@ -1,6 +1,8 @@
 package com.ytgld.seeking_immortals.mixin;
 
+import com.mojang.blaze3d.shaders.Effect;
 import com.ytgld.seeking_immortals.Handler;
+import com.ytgld.seeking_immortals.init.Effects;
 import com.ytgld.seeking_immortals.init.Items;
 import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -22,28 +24,24 @@ public abstract class LivingEntityMixin {
     @Inject(at = @At("RETURN"), method = "getMaxHealth", cancellable = true)
     private void SeekingImmortalscreateAttributes(CallbackInfoReturnable<Float> cir){
         LivingEntity living = (LivingEntity) (Object) this;
-        if (Handler.hascurio(living, Items.apple.get())){
-            cir.setReturnValue(30f);
-        }
-        if (Handler.hascurio(living, Items.falling_immortals.get())){
+        if (living.hasEffect(Effects.life.get())){
             cir.setReturnValue(30f);
         }
     }
+
     @Inject(at = @At("RETURN"), method = "getArmorValue", cancellable = true)
     private void getArmorValue(CallbackInfoReturnable<Integer> cir){
         LivingEntity living = (LivingEntity) (Object) this;
-        if (Handler.hascurio(living, Items.falling_immortals.get())){
+        if (living.hasEffect(Effects.life.get())){
             cir.setReturnValue(10);
         }
-
     }
     @Inject(at = @At("RETURN"), method = "getAttributeValue(Lnet/minecraft/core/Holder;)D", cancellable = true)
     private void getAttributeValue(Holder<Attribute> attribute, CallbackInfoReturnable<Double> cir) {
         LivingEntity living = (LivingEntity) (Object) this;
-        if (Handler.hascurio(living, Items.falling_immortals.get())){
+        if (living.hasEffect(Effects.life.get())){
             cir.setReturnValue(this.getAttributeBaseValue(attribute));
         }
-
     }
     @Inject(at = @At("RETURN"), method = "canBeAffected", cancellable = true)
     private void canBeAffected(MobEffectInstance effectInstance, CallbackInfoReturnable<Boolean> cir){
@@ -57,9 +55,8 @@ public abstract class LivingEntityMixin {
     @Inject(at = @At("RETURN"), method = "getAttributeValue(Lnet/minecraft/world/entity/ai/attributes/Attribute;)D", cancellable = true)
     private void getAttributeValue2(Attribute p_21134_, CallbackInfoReturnable<Double> cir) {
         LivingEntity living = (LivingEntity) (Object) this;
-        if (Handler.hascurio(living, Items.falling_immortals.get())){
+        if (living.hasEffect(Effects.life.get())){
             cir.setReturnValue(this.getAttributeBaseValue(p_21134_));
         }
-
     }
 }

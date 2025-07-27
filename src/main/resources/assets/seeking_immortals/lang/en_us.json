@@ -418,6 +418,7 @@
 
 
   "effect.seeking_immortals.invulnerable": "invulnerable",
+  "effect.seeking_immortals.life": "life",
 
   "item.seeking_immortals.nightmare_base_start_egg":"§4Origin Egg",
   "item.nightmare_base_start_egg.tool.string": "Luck +10",
