@@ -8,6 +8,7 @@ import com.ytgld.seeking_immortals.item.nightmare.AllTip;
 import com.ytgld.seeking_immortals.item.nightmare.ToolTip;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.SuperNightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.nightmare;
+import com.ytgld.seeking_immortals.renderer.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -64,7 +65,10 @@ public class blood_god  extends nightmare implements SuperNightmare, AllTip {
     public static final String give_End = "give_End";
 
 
-
+    @Override
+    public int color(ItemStack stack) {
+        return Light.ARGB.color(255,255,50,50);
+    }
 
     @Override
     public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
@@ -202,9 +206,16 @@ public class blood_god  extends nightmare implements SuperNightmare, AllTip {
 
         pTooltipComponents.add(Component.translatable("item.blood_god.tool.string.6").withStyle(ChatFormatting.DARK_RED));
         pTooltipComponents.add(Component.translatable("item.blood_god.tool.string.7").withStyle(ChatFormatting.DARK_RED));
+    }
 
+    @Override
+    public int maxLevel(ItemStack stack) {
+        return 1;
+    }
 
-
+    @Override
+    public int nowLevel(ItemStack stack) {
+        return 1;
     }
     @Override
     public Map<Integer, String> element(ItemStack stack) {

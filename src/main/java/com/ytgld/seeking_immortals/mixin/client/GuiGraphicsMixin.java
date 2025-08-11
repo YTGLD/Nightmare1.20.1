@@ -2,11 +2,17 @@ package com.ytgld.seeking_immortals.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import com.ytgld.seeking_immortals.MGuiGraphics;
 import com.ytgld.seeking_immortals.SeekingImmortalsMod;
+import com.ytgld.seeking_immortals.event.old.NewEvent;
+import com.ytgld.seeking_immortals.item.nightmare.Terror;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.INightmare;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.nightmare_base;
+import com.ytgld.seeking_immortals.renderer.IAbstractContainerScreen;
+import com.ytgld.seeking_immortals.renderer.IGuiGraphics;
 import com.ytgld.seeking_immortals.renderer.MRender;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -18,6 +24,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec2;
 import org.joml.Matrix4f;
 import org.joml.Vector2ic;
 import org.spongepowered.asm.mixin.Final;
@@ -31,7 +38,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 
 @Mixin(GuiGraphics.class)
-public abstract class GuiGraphicsMixin {
+public abstract class GuiGraphicsMixin implements IGuiGraphics {
 
     @Shadow private ItemStack tooltipStack;
 
@@ -72,7 +79,58 @@ public abstract class GuiGraphicsMixin {
         }
     }
 
+    @Override
+    public  void seekingImmortals$addW( ItemStack stack) {
+        GuiGraphics guiGraphics = (GuiGraphics) (Object) this;
+        if (stack.getItem() instanceof Terror terror) {
+            if (terror.maxLevel(stack)!=0&&terror.nowLevel(stack)!=0) {
+                if (terror.nowLevel(stack) >= terror.maxLevel(stack)) {
+                    guiGraphics.pose().pushPose();
+                    if (this.minecraft.screen instanceof IAbstractContainerScreen iAbstractContainerScreen) {
+                        List<Vec2> xy = iAbstractContainerScreen.seekingImmortals$xy();
+                        if (xy != null) {
+                            for (int i = 1; i < xy.size(); i++) {
+                                Vec2 prevPos = xy.get(i - 1);
+                                Vec2 currPos = xy.get(i);
+                                if (prevPos.x != 0 && prevPos.y != 0 && currPos.x != 0 && currPos.y != 0) {
+                                    float alpha = (float) (i) / (float) (xy.size());
+                                    Vec2 adjustedPrevPos = new Vec2(prevPos.x, prevPos.y);
+                                    Vec2 adjustedCurrPos = new Vec2(currPos.x, currPos.y);
+                                    guiGraphics.pose().pushPose();
+                                    guiGraphics.pose().translate(prevPos.x, prevPos.y, 0);
+                                    guiGraphics.pose().scale(alpha, alpha, alpha);
+                                    guiGraphics.pose().translate(-prevPos.x, -prevPos.y, 0);
 
+                                    if (terror.color(stack) == 0) {
+                                        MGuiGraphics.blit(guiGraphics, terror.image(null),
+                                                adjustedCurrPos.x - 12, adjustedCurrPos.y - 12,
+                                                0, 0, 24, 24, 24, 24,
+                                                (alpha), 0.25f, alpha / 2f, alpha);
+                                    } else {
+                                        int color = terror.color(stack);
+                                        int as = (color >> 24) & 0xFF;
+                                        int rs = (color >> 16) & 0xFF;
+                                        int gs = (color >> 8) & 0xFF;
+                                        int bs = color & 0xFF;
+                                        float a = as / 255f;
+                                        float r = rs / 255f;
+                                        float g = gs / 255f;
+                                        float b = bs / 255f;
+                                        MGuiGraphics.blit(guiGraphics, terror.image(null),
+                                                adjustedCurrPos.x - 12, adjustedCurrPos.y - 12,
+                                                0, 0, 24, 24, 24, 24,
+                                                r, g, b * alpha, alpha);
+                                    }
+                                    guiGraphics.pose().popPose();
+                                }
+                            }
+                        }
+                    }
+                    guiGraphics.pose().popPose();
+                }
+            }
+        }
+    }
 
 
     @Unique
@@ -89,6 +147,8 @@ public abstract class GuiGraphicsMixin {
     @Shadow public abstract void flush();
 
     @Shadow private boolean managed;
+    @Shadow @Final private Minecraft minecraft;
+
     @Inject(at = @At(value = "INVOKE",target = "Lnet/minecraft/client/gui/GuiGraphics;drawManaged(Ljava/lang/Runnable;)V"),method = "renderTooltipInternal(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;)V")
     public void moonstone$ClientTooltipPositioner(Font p_282675_, List<ClientTooltipComponent> p_282615_, int x, int y, ClientTooltipPositioner p_282442_, CallbackInfo ci) {
         moon1_21$drawManaged(()->{

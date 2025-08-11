@@ -1,5 +1,6 @@
 package com.ytgld.seeking_immortals.event.old;
 
+import com.ytgld.seeking_immortals.Config;
 import com.ytgld.seeking_immortals.Handler;
 import com.ytgld.seeking_immortals.SeekingImmortalsMod;
 import com.ytgld.seeking_immortals.init.AttReg;
@@ -34,6 +35,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
@@ -159,8 +162,29 @@ public class NewEvent {
     public  void PlayerLoggedInEvent(PlayerEvent.PlayerLoggedInEvent event) {
         Player player = event.getEntity();
         if (!player.getTags().contains(SeekingImmortalsMod.MODID+"nightmare")) {
-            player.addItem(Items.nightmare_base.get().getDefaultInstance());
+
+            if (!Config.SERVER.eqNightmareBase.get()) {
+                player.addItem(Items.nightmare_base.get().getDefaultInstance());
+            }else {
+                CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
+                    Map<String, ICurioStacksHandler> curios = handler.getCurios();
+                    for (Map.Entry<String, ICurioStacksHandler> entry : curios.entrySet()) {
+                        ICurioStacksHandler stacksHandler = entry.getValue();
+                        IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                        for (int i = 0; i < stacksHandler.getSlots(); i++) {
+                            ItemStack stack = stackHandler.getStackInSlot(i);
+                            if (stack.isEmpty()) {
+                                stackHandler.setStackInSlot(i, Items.nightmare_base.get().getDefaultInstance());
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                });
+            }
+
             player.addTag(SeekingImmortalsMod.MODID+"nightmare");
+
         }
     }
     @SubscribeEvent

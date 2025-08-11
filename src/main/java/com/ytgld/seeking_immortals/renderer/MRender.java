@@ -67,22 +67,6 @@ public class MRender extends RenderType {
                 return create("beacon_beam", DefaultVertexFormat.BLOCK, VertexFormat.Mode.QUADS, 1536,
                         false, true, rendertype$compositestate);
             });
-    public static final RenderType Snake_p_blood = create(
-            "p_blood",
-            DefaultVertexFormat.POSITION,
-            VertexFormat.Mode.QUADS,
-            256,
-            false,
-            false,
-            CompositeState.builder()
-                    .setShaderState(RENDER_STATE_SHARD_p_blood)
-                    .setWriteMaskState(COLOR_DEPTH_WRITE)
-                    .setTransparencyState(LIGHTNING_TRANSPARENCY)
-                    .setTextureState(MultiTextureStateShard.builder().
-                            add(new ResourceLocation(SeekingImmortalsMod.MODID,"textures/p_blood.png"),
-                                    false,
-                                    false).add(new ResourceLocation(SeekingImmortalsMod.MODID,"textures/p_blood.png"),
-                                    false, false).build()).createCompositeState(false));
     public static final BiFunction<ResourceLocation, RenderStateShard.TransparencyStateShard, RenderType> EYES = Util.memoize(
             (p_311464_, p_311465_) -> {
                 RenderStateShard.TextureStateShard renderstateshard$texturestateshard = new RenderStateShard.TextureStateShard(p_311464_, false, false);
@@ -169,20 +153,6 @@ public class MRender extends RenderType {
                                             false,
                                             false).add(new ResourceLocation(SeekingImmortalsMod.MODID,"textures/eye.png"),
                                             false, false).build()).createCompositeState(false));
-    public static final RenderType man =
-            create("man",
-                    DefaultVertexFormat.POSITION,
-                    VertexFormat.Mode.QUADS,
-                    256,
-                    false,
-                    false,
-                    CompositeState.builder()
-                            .setShaderState(RENDER_STATE_SHARD_Shader_EYE)
-                            .setTextureState(MultiTextureStateShard.builder().
-                                    add(new ResourceLocation(SeekingImmortalsMod.MODID,"textures/man.png"),
-                                            false,
-                                            false).add(new ResourceLocation(SeekingImmortalsMod.MODID,"textures/man.png"),
-                                            false, false).build()).createCompositeState(false));
 
     private static final RenderType GATEWAY =
             create("gateway",
@@ -229,31 +199,6 @@ public class MRender extends RenderType {
                                             false).add(new ResourceLocation(SeekingImmortalsMod.MODID,"textures/mls.png"),
                                             false, false).build()).createCompositeState(false));
 
-    public static final BiFunction<ResourceLocation, Boolean, RenderType> ENTITY_TRANSLUCENT_EMISSIVE = Util.memoize(
-            (p_286163_, p_286164_) -> {
-                CompositeState rendertype$compositestate = CompositeState.builder()
-                        .setShaderState(RENDERTYPE_ENTITY_TRANSLUCENT_EMISSIVE_SHADER)
-                        .setTextureState(new TextureStateShard(p_286163_, false, false))
-                        .setTransparencyState(TRANSLUCENT_TRANSPARENCY)
-                        .setCullState(NO_CULL)
-                        .setWriteMaskState(COLOR_WRITE)
-                        .setOverlayState(OVERLAY)
-                        .createCompositeState(p_286164_);
-                return create("entity_translucent_emissive", DefaultVertexFormat.NEW_ENTITY, VertexFormat.Mode.QUADS, 1536, true, true, rendertype$compositestate);
-            }
-    );
-    public static RenderType gateways() {
-        return GATEWAY;
-    }
-    public static RenderType Snake() {
-        return Snake_render;
-    }
-    public static RenderType t() {
-        return TRAIL;
-    }
-    public static RenderType getMls() {
-        return MLS;
-    }
     public static RenderType ging() {
         return GING;
     }

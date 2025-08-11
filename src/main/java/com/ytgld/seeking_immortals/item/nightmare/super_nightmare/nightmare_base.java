@@ -8,6 +8,7 @@ import com.ytgld.seeking_immortals.init.Items;
 import com.ytgld.seeking_immortals.item.nightmare.base.blood_god;
 import com.ytgld.seeking_immortals.item.nightmare.base.lead;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.nightmare;
+import com.ytgld.seeking_immortals.renderer.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -32,8 +33,6 @@ import java.util.*;
 
 public class nightmare_base extends nightmare {
 
-    public int tick = 0;
-
     @Override
     public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
         slotContext.entity().getAttributes().removeAttributeModifiers(gets(slotContext));
@@ -41,9 +40,8 @@ public class nightmare_base extends nightmare {
 
     @Override
     public void curioTick(SlotContext slotContext, ItemStack stack) {
-        slotContext.entity().getAttributes().addTransientAttributeModifiers(gets(slotContext));
-        tick = 100;
 
+        slotContext.entity().getAttributes().addTransientAttributeModifiers(gets(slotContext));
 
         if (slotContext.entity() instanceof Player player) {
             int kill = Handler.getTagNumber(stack, blood_god.giveName_kill);
@@ -264,6 +262,11 @@ public class nightmare_base extends nightmare {
     public void appendHoverText(ItemStack stack, net.minecraft.world.level.Level context, List<Component> pTooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, pTooltipComponents, tooltipFlag);
         pTooltipComponents.add(Component.translatable("item.nightmare_base.tool.string").withStyle(ChatFormatting.DARK_RED));
+    }
+
+    @Override
+    public int color(ItemStack stack) {
+        return Light.ARGB.color(255,255,50,255);
     }
 }
 

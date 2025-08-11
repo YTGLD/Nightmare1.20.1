@@ -29,6 +29,14 @@ public class Config {
         {
             BUILDER.push("噩梦");
             {
+                BUILDER.push("其他");
+                eqNightmareBase = BUILDER
+                        .comment("开局自动佩戴噩梦基座")
+                        .define("eqNightmareBase", false);
+                BUILDER.pop();
+
+            }
+            {
                 BUILDER.push("获取");
                 give_nightmare_base_insight_drug = BUILDER
                         .comment("疯狂灵药获取时要求的药水数量")
@@ -125,6 +133,7 @@ public class Config {
         BUILDER.build();
     }
 
+    public   ForgeConfigSpec.BooleanValue eqNightmareBase ;
 
 
     public   ForgeConfigSpec.IntValue blood_god_kill ;

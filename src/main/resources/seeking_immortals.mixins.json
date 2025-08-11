@@ -12,6 +12,7 @@
     "PlayerMixin"
   ],
   "client": [
+    "client.AbstractContainerScreenMixin",
     "client.AdvancementWidgetMixin",
     "client.ATabMixin",
     "client.ChestRendererMixin",

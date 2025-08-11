@@ -1,12 +1,16 @@
 package com.ytgld.seeking_immortals.item.nightmare;
 
 import com.ytgld.seeking_immortals.Handler;
+import com.ytgld.seeking_immortals.SeekingImmortalsMod;
+import com.ytgld.seeking_immortals.event.old.NewEvent;
 import com.ytgld.seeking_immortals.init.Effects;
 import com.ytgld.seeking_immortals.init.Items;
 import com.ytgld.seeking_immortals.item.nightmare.super_nightmare.extend.INightmare;
+import com.ytgld.seeking_immortals.renderer.Light;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -22,10 +26,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurioItem;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 不朽轮回之印章
@@ -46,7 +52,7 @@ import java.util.List;
  * <p>
  * 深渊和噩梦物品无效化
  */
-public class immortal extends Item implements ICurioItem , INightmare {
+public class immortal extends Item implements ICurioItem , INightmare ,Terror{
 
 
     public immortal() {
@@ -134,4 +140,38 @@ public class immortal extends Item implements ICurioItem , INightmare {
            tooltip.add(Component.translatable("item.immortal.tool.string.8").withStyle(ChatFormatting.DARK_RED).withStyle(ChatFormatting.BOLD));
        }
     }
+
+    @Override
+    public ResourceLocation image(@Nullable LivingEntity entity) {
+        return new ResourceLocation(SeekingImmortalsMod.MODID,"textures/gui/tooltip/fire.png");
+    }
+
+    @Nullable
+    @Override
+    public Map<Integer, Component> describe(ItemStack stack) {
+        return null;
+    }
+
+    @Override
+    public int maxLevel(ItemStack stack) {
+        return 1;
+    }
+
+    @Override
+    public int nowLevel(ItemStack stack) {
+        return 1;
+    }
+
+    @Override
+    public int color(ItemStack stack) {
+        int s = (int) (200 *  Math.sin(NewEvent.time/100))+55;
+        if (s < 0) {
+            s = 0;
+        }
+        if (s > 255) {
+            s=255;
+        }
+        return Light.ARGB.color(255,255,50,s );
+    }
+
 }

@@ -65,21 +65,35 @@ public class nightmare_base_stone extends nightmare implements SuperNightmare, A
             stack.getOrCreateTag();
         }
         if (slotContext.entity() instanceof Player player){
-
-            float lv = player.getHealth() / player.getMaxHealth();
-
-            lv *= 100;
-            int now = (int) (100 -(lv));
-            if (stack.getTag()==null){
-                stack.getOrCreateTag();
+            if (!player.level().isClientSide) {
+                float lv = player.getHealth() / player.getMaxHealth();
+                lv *= 100;
+                int now = (int) (100 -(lv));
+                if (stack.getTag()==null){
+                    stack.getOrCreateTag();
+                }
+                if (stack.getTag()!=null){
+                    stack.getTag().putInt(uDead,now);
+                }
             }
-            if (stack.getTag()!=null){
-                stack.getTag().putInt(uDead,now);
-            }
 
-            player.getAttributes().addTransientAttributeModifiers(ad(stack));
         }
     }
+
+    @Override
+    public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
+        if (slotContext.entity() instanceof Player player){
+            if (!player.level().isClientSide) {
+                player.getAttributes().addTransientAttributeModifiers(ad(stack));
+            }
+        }
+    }
+
+    @Override
+    public void onUnequip(SlotContext slotContext, ItemStack newStack, ItemStack stack) {
+        slotContext.entity().getAttributes().removeAttributeModifiers(ad(stack));
+    }
+
     public Multimap<Attribute, AttributeModifier> ad(ItemStack stack) {
         Multimap<Attribute, AttributeModifier> modifiers = HashMultimap.create();
 
